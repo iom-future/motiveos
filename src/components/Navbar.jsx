@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { NAV_LINKS } from '../data/content'
 import { Logo } from './Logo'
@@ -7,6 +7,9 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeHash, setActiveHash] = useState('')
+
+  const isClickScrollingRef = useRef(false)
+  const scrollTimeoutRef = useRef(null)
 
   useEffect(() => {
     const onScroll = () => {
@@ -18,27 +21,67 @@ export function Navbar() {
   }, [])
 
   useEffect(() => {
-    const sections = NAV_LINKS.map((link) =>
-      document.querySelector(link.href)
-    ).filter(Boolean)
+    const updateActiveSection = () => {
+      // If the user clicked a nav link, do NOT update or slide through intermediate sections
+      if (isClickScrollingRef.current) return
 
-    if (!sections.length) return
+      const scrollY = window.scrollY
+      if (scrollY < 200) {
+        setActiveHash('')
+        return
+      }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-        if (visible[0]?.target?.id) {
-          setActiveHash(`#${visible[0].target.id}`)
+      // Check if user is scrolled to the absolute bottom of the document
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      if (windowHeight + scrollY >= documentHeight - 120) {
+        setActiveHash(NAV_LINKS[NAV_LINKS.length - 1].href)
+        return
+      }
+
+      const detectionLine = 240
+      for (const item of NAV_LINKS) {
+        const el = document.querySelector(item.href)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= detectionLine && rect.bottom >= detectionLine) {
+            setActiveHash(item.href)
+            return
+          }
         }
-      },
-      { rootMargin: '-35% 0px -55% 0px', threshold: [0, 0.25, 0.5] }
-    )
+      }
+    }
 
-    sections.forEach((sec) => observer.observe(sec))
-    return () => observer.disconnect()
+    updateActiveSection()
+    window.addEventListener('scroll', updateActiveSection, { passive: true })
+
+    const handleScrollEnd = () => {
+      isClickScrollingRef.current = false
+    }
+    window.addEventListener('scrollend', handleScrollEnd)
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection)
+      window.removeEventListener('scrollend', handleScrollEnd)
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
+    }
   }, [])
+
+  // Instantly jump highlighter to target link and suppress scroll updates during transit
+  const handleNavClick = (href) => {
+    setActiveHash(href)
+    isClickScrollingRef.current = true
+
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current)
+    }
+
+    scrollTimeoutRef.current = setTimeout(() => {
+      isClickScrollingRef.current = false
+    }, 900)
+  }
 
   return (
     <header
@@ -52,16 +95,17 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between gap-2 lg:gap-4">
           <a
             href="#top"
+            onClick={() => handleNavClick('')}
             className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] rounded shrink-0"
             aria-label="MotiveOS Home"
           >
             <Logo />
           </a>
 
-          {/* Desktop Nav: progressively scales down typography, padding & gaps across desktop sizes to eliminate cramping */}
+          {/* Desktop Nav: discrete active highlighter that jumps instantly without traversing intermediate links */}
           <nav
             aria-label="Primary"
-            className="hidden md:flex items-center gap-1.5 min-[860px]:gap-2 lg:gap-3 min-[1180px]:gap-4 xl:gap-5 2xl:gap-7"
+            className="hidden md:flex items-center gap-1 min-[860px]:gap-1.5 lg:gap-2.5 min-[1180px]:gap-3 xl:gap-4 2xl:gap-6"
           >
             {NAV_LINKS.map((item) => {
               const isActive = activeHash === item.href
@@ -69,10 +113,12 @@ export function Navbar() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`text-[11px] min-[860px]:text-[11.5px] lg:text-xs min-[1180px]:text-[13px] 2xl:text-sm font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] rounded px-1 min-[860px]:px-1.5 xl:px-2 py-0.5 whitespace-nowrap ${
+                  onClick={() => handleNavClick(item.href)}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`relative inline-flex items-center text-[11px] min-[860px]:text-[11.5px] lg:text-xs min-[1180px]:text-[13px] 2xl:text-sm font-medium rounded-md px-2 py-1 min-[860px]:px-2.5 xl:px-3 whitespace-nowrap transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] ${
                     isActive
-                      ? 'text-[#F4F7FA]'
-                      : 'text-[#93A1B0] hover:text-[#F4F7FA]'
+                      ? 'bg-[#18232E] text-[#F4F7FA] border border-[#55B8FF]/50 shadow-[0_0_12px_rgba(85,184,255,0.18)]'
+                      : 'text-[#93A1B0] hover:text-[#F4F7FA] hover:bg-[#111820]/80 border border-transparent'
                   }`}
                 >
                   {item.label}
@@ -84,6 +130,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-2 lg:gap-3 shrink-0">
             <a
               href="#developers"
+              onClick={() => handleNavClick('#developers')}
               className="hidden min-[1100px]:inline-block text-xs xl:text-sm text-[#93A1B0] hover:text-[#F4F7FA] transition-colors px-2 py-1.5 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] whitespace-nowrap"
             >
               Explore Documentation
@@ -111,22 +158,35 @@ export function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-[#273644] bg-[#080B10]">
           <div className="px-6 py-5 space-y-4">
-            <nav aria-label="Mobile" className="flex flex-col space-y-3">
-              {NAV_LINKS.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-sm text-[#93A1B0] hover:text-[#F4F7FA] py-1"
-                >
-                  {item.label}
-                </a>
-              ))}
+            <nav aria-label="Mobile" className="flex flex-col space-y-2">
+              {NAV_LINKS.map((item) => {
+                const isActive = activeHash === item.href
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => {
+                      handleNavClick(item.href)
+                      setMobileOpen(false)
+                    }}
+                    className={`flex items-center justify-between text-sm py-2 px-3 rounded-md transition-colors ${
+                      isActive
+                        ? 'bg-[#18232E] text-[#F4F7FA] border border-[#55B8FF]/40 font-medium'
+                        : 'text-[#93A1B0] hover:text-[#F4F7FA] hover:bg-[#111820]'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                  </a>
+                )
+              })}
             </nav>
             <div className="pt-4 border-t border-[#273644] flex flex-col gap-3">
               <a
                 href="#developers"
-                onClick={() => setMobileOpen(false)}
+                onClick={() => {
+                  handleNavClick('#developers')
+                  setMobileOpen(false)
+                }}
                 className="inline-flex items-center justify-center rounded-md border border-[#273644] bg-[#111820] px-4 py-2.5 text-sm font-medium text-[#F4F7FA]"
               >
                 Explore Documentation
