@@ -526,3 +526,4 @@ export const FOOTER_COLUMNS = {
     { label: 'Privacy Policy', href: '#early-access' },
   ],
 }
+
