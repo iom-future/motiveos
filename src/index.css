@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #080B10;
+  --color-surface: #111820;
+  --color-surface-elevated: #18232E;
+  --color-border-subtle: #273644;
+  --color-accent: #55B8FF;
+  --color-signal: #54E4D3;
+  --color-text-primary: #F4F7FA;
+  --color-text-secondary: #93A1B0;
+
+  --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    background-color: #080B10;
+    color: #F4F7FA;
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Architectural subtle coordinate grid */
+.bg-tech-grid {
+  background-size: 48px 48px;
+  background-image:
+    linear-gradient(to right, rgba(39, 54, 68, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(39, 54, 68, 0.22) 1px, transparent 1px);
+}
+
+.bg-tech-grid-fine {
+  background-size: 24px 24px;
+  background-image:
+    linear-gradient(to right, rgba(39, 54, 68, 0.28) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(39, 54, 68, 0.28) 1px, transparent 1px);
+}
+
+/* Custom subtle scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080B10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #273644;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #36495B;
+}
+
+/* Subtle SVG path flow animation */
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes dashFlowReverse {
+  to {
+    stroke-dashoffset: 24;
+  }
+}
+
+.animate-dash-flow {
+  animation: dashFlow 1.6s linear infinite;
+}
+
+.animate-dash-flow-slow {
+  animation: dashFlow 3s linear infinite;
+}
+
+.animate-dash-reverse {
+  animation: dashFlowReverse 2.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-dash-flow,
+  .animate-dash-flow-slow,
+  .animate-dash-reverse {
+    animation: none;
+  }
+}
