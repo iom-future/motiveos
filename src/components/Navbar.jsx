@@ -48,24 +48,28 @@ export function Navbar() {
           : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between gap-2 lg:gap-4">
           <a
             href="#top"
-            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] rounded"
+            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] rounded shrink-0"
             aria-label="MotiveOS Home"
           >
             <Logo />
           </a>
 
-          <nav aria-label="Primary" className="hidden md:flex items-center gap-8">
+          {/* Desktop Nav: progressively scales down typography, padding & gaps across desktop sizes to eliminate cramping */}
+          <nav
+            aria-label="Primary"
+            className="hidden md:flex items-center gap-1.5 min-[860px]:gap-2 lg:gap-3 min-[1180px]:gap-4 xl:gap-5 2xl:gap-7"
+          >
             {NAV_LINKS.map((item) => {
               const isActive = activeHash === item.href
               return (
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`text-sm transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] rounded px-1 py-0.5 ${
+                  className={`text-[11px] min-[860px]:text-[11.5px] lg:text-xs min-[1180px]:text-[13px] 2xl:text-sm font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] rounded px-1 min-[860px]:px-1.5 xl:px-2 py-0.5 whitespace-nowrap ${
                     isActive
                       ? 'text-[#F4F7FA]'
                       : 'text-[#93A1B0] hover:text-[#F4F7FA]'
@@ -77,16 +81,16 @@ export function Navbar() {
             })}
           </nav>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2 lg:gap-3 shrink-0">
             <a
               href="#developers"
-              className="text-sm text-[#93A1B0] hover:text-[#F4F7FA] transition-colors px-2 py-1.5 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF]"
+              className="hidden min-[1100px]:inline-block text-xs xl:text-sm text-[#93A1B0] hover:text-[#F4F7FA] transition-colors px-2 py-1.5 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] whitespace-nowrap"
             >
               Explore Documentation
             </a>
             <a
               href="#early-access"
-              className="inline-flex items-center justify-center rounded-md bg-[#F4F7FA] px-4 py-2 text-sm font-medium text-[#080B10] hover:bg-[#55B8FF] hover:text-[#080B10] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080B10]"
+              className="inline-flex items-center justify-center rounded-md bg-[#F4F7FA] px-2.5 py-1.5 min-[860px]:px-3 min-[860px]:py-1.5 xl:px-4 xl:py-2 text-xs xl:text-sm font-medium text-[#080B10] hover:bg-[#55B8FF] hover:text-[#080B10] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55B8FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080B10] whitespace-nowrap"
             >
               Get Early Access
             </a>
@@ -141,4 +145,3 @@ export function Navbar() {
     </header>
   )
 }
-

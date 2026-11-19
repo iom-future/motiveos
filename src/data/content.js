@@ -4,6 +4,8 @@ export const NAV_LINKS = [
   { label: 'Applications', href: '#applications' },
   { label: 'Developers', href: '#developers' },
   { label: 'Research', href: '#world-model' },
+  { label: 'Team', href: '#team' },
+  { label: 'Testimonials', href: '#testimonials' },
 ]
 
 export const PROBLEM_ITEMS = [
@@ -515,9 +517,9 @@ export const FOOTER_COLUMNS = {
   ],
   Company: [
     { label: 'About', href: '#problem' },
+    { label: 'Team', href: '#team' },
     { label: 'Research', href: '#world-model' },
     { label: 'Early Access', href: '#early-access' },
-    { label: 'Contact', href: '#early-access' },
   ],
   Resources: [
     { label: 'Robotics Insights', href: '#applications' },
@@ -526,4 +528,70 @@ export const FOOTER_COLUMNS = {
     { label: 'Privacy Policy', href: '#early-access' },
   ],
 }
+
+export const TEAM_MEMBERS = [
+  {
+    name: 'Dr. Tunde Adeyemi',
+    role: 'Co-Founder & Chief Executive Officer',
+    bio: 'Leads MotiveOS product architecture and physical AI direction, with deep experience in autonomous mobile robotics and real-time control systems.',
+    imageKey: 'tunde',
+  },
+  {
+    name: 'Chidinma Okafor',
+    role: 'Co-Founder & Chief Technology Officer',
+    bio: 'Architects the core perception and sensor-fusion pipeline, focusing on reliable multi-modal scene understanding in dynamic industrial environments.',
+    imageKey: 'chidinma',
+  },
+  {
+    name: 'Ibrahim Musa',
+    role: 'Head of Spatial Intelligence',
+    bio: 'Directs world representation research, connecting 3D spatial mapping, semantic scene graphs, and context-aware navigation.',
+    imageKey: 'ibrahim',
+  },
+  {
+    name: 'Ngozi Eze',
+    role: 'Principal Motion Planning Engineer',
+    bio: 'Designs constraint-aware trajectory synthesis and adaptive task planning modules for autonomous mobile platforms.',
+    imageKey: 'ngozi',
+  },
+  {
+    name: 'Segun Balogun',
+    role: 'Lead Simulation & Validation Engineer',
+    bio: 'Builds deterministic robotics testbeds and scenario validation workflows to evaluate autonomous behaviour prior to physical deployment.',
+    imageKey: 'segun',
+  },
+  {
+    name: 'Amina Bello',
+    role: 'Lead Robotics Systems & Safety Engineer',
+    bio: 'Oversees middleware interoperability, hardware abstraction interfaces, and human-supervised operational safety constraints.',
+    imageKey: 'amina',
+  },
+]
+
+export const TESTIMONIALS = [
+  {
+    quote:
+      'Most robotics teams spend months writing brittle glue code between perception models and motion planners. MotiveOS approaches the problem at the right architectural boundary—giving engineers a coherent spatial layer they can actually reason about.',
+    name: 'Olumide Fashola',
+    role: 'Principal Robotics Engineer',
+    organization: 'Lagos Autonomous Systems Lab',
+    imageKey: 'olumide',
+  },
+  {
+    quote:
+      'Connecting sensor observations directly to a persistent world model and validating those behaviours in simulation before touching hardware is exactly the workflow mobile robotics research has been missing.',
+    name: 'Dr. Rachel Lindqvist',
+    role: 'Director of Mobile Robotics Research',
+    organization: 'Nordic Industrial Lab',
+    imageKey: 'rachel',
+  },
+  {
+    quote:
+      'What stands out is the restraint and engineering pragmatism. Rather than asking teams to throw away ROS 2 and their existing control stack, MotiveOS is designed to slot in cleanly as an intelligence and orchestration layer.',
+    name: 'Kenji Takahashi',
+    role: 'Lead Perception Architect',
+    organization: 'Kanto Automation Works',
+    imageKey: 'kenji',
+  },
+]
 

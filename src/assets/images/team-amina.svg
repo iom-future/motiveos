@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <radialGradient id="bgGlowA" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#1B242E"/>
+      <stop offset="55%" stop-color="#0F161E"/>
+      <stop offset="100%" stop-color="#080B10"/>
+    </radialGradient>
+    <linearGradient id="skinAmina" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#7A4D35"/>
+      <stop offset="50%" stop-color="#5E3925"/>
+      <stop offset="100%" stop-color="#412415"/>
+    </linearGradient>
+    <linearGradient id="hijab" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#1E2833"/>
+      <stop offset="60%" stop-color="#141C24"/>
+      <stop offset="100%" stop-color="#0B1015"/>
+    </linearGradient>
+    <linearGradient id="blazerAmina" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161E28"/>
+      <stop offset="60%" stop-color="#0F151C"/>
+      <stop offset="100%" stop-color="#090D11"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="800" fill="url(#bgGlowA)"/>
+
+  <!-- Safety Envelope Graphic Lines -->
+  <g opacity="0.18" stroke="#55B8FF" stroke-width="1">
+    <circle cx="300" cy="310" r="210" stroke-dasharray="5 5" fill="none"/>
+    <circle cx="300" cy="310" r="260" stroke-dasharray="2 4" fill="none"/>
+  </g>
+
+  <!-- Tailored Charcoal Blazer & Shoulders -->
+  <path d="M110 800 L155 560 Q215 510 270 500 L330 500 Q385 510 445 560 L490 800 Z" fill="url(#blazerAmina)"/>
+  <!-- Lapel structure -->
+  <path d="M220 520 L270 650 L285 650 L260 505 Z" fill="#202C38"/>
+  <path d="M380 520 L330 650 L315 650 L340 505 Z" fill="#202C38"/>
+
+  <!-- Slate Hijab (Drape around shoulders & neck) -->
+  <path d="M180 520 Q240 540 300 542 Q360 540 420 520 L400 450 Q300 480 200 450 Z" fill="url(#hijab)"/>
+
+  <!-- Hijab Head Wrap -->
+  <path d="M190 320 C180 180, 240 140, 300 140 C360 140, 420 180, 410 320 C405 400, 365 470, 300 470 C235 470, 195 400, 190 320 Z" fill="url(#hijab)"/>
+  <!-- Hijab Fold Accents -->
+  <path d="M215 220 Q300 180 385 220" stroke="#2B3847" stroke-width="2.5" fill="none"/>
+  <path d="M205 270 Q300 240 395 270" stroke="#2B3847" stroke-width="2" fill="none"/>
+
+  <!-- Face Opening inside Hijab -->
+  <ellipse cx="300" cy="325" rx="72" ry="94" fill="url(#skinAmina)"/>
+
+  <!-- Eyes & Brows -->
+  <path d="M250 295 Q268 288 286 295" stroke="#120D0A" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M314 295 Q332 288 350 295" stroke="#120D0A" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <!-- Expressive eyes -->
+  <ellipse cx="268" cy="308" rx="11" ry="6.5" fill="#F4F7FA" opacity="0.9"/>
+  <circle cx="270" cy="308" r="4.8" fill="#18110B"/>
+  <circle cx="271" cy="307" r="1.5" fill="#FFFFFF"/>
+  <ellipse cx="332" cy="308" rx="11" ry="6.5" fill="#F4F7FA" opacity="0.9"/>
+  <circle cx="330" cy="308" r="4.8" fill="#18110B"/>
+  <circle cx="331" cy="307" r="1.5" fill="#FFFFFF"/>
+
+  <!-- Nose -->
+  <path d="M299 300 L295 340 Q288 350 300 352 Q312 350 305 340 L301 300" fill="#422516" opacity="0.55"/>
+
+  <!-- Lips / Composed expression -->
+  <path d="M276 376 Q300 382 324 376" stroke="#4F2618" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M280 376 Q300 380 320 376" stroke="#7A3F2A" stroke-width="2" fill="none"/>
+
+  <!-- Hijab chin contour shadow -->
+  <path d="M236 370 Q300 422 364 370 Q350 432 300 435 Q250 432 236 370 Z" fill="#121820" opacity="0.85"/>
+
+  <!-- Safety & Systems HUD tag -->
+  <g opacity="0.65">
+    <rect x="420" y="160" width="118" height="42" rx="4" fill="#080B10" stroke="#273644" stroke-width="1"/>
+    <text x="430" y="177" fill="#54E4D3" font-size="9" font-family="JetBrains Mono, monospace">SAFETY_STATE: OK</text>
+    <text x="430" y="192" fill="#55B8FF" font-size="9" font-family="JetBrains Mono, monospace">INTERLOCK: ARMED</text>
+  </g>
+</svg>
+

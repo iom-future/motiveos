@@ -16,6 +16,8 @@ import { Simulation } from './components/Simulation'
 import { Audience } from './components/Audience'
 import { Integrations } from './components/Integrations'
 import { Safety } from './components/Safety'
+import { Team } from './components/Team'
+import { Testimonials } from './components/Testimonials'
 import { EarlyAccess } from './components/EarlyAccess'
 import { FAQ } from './components/FAQ'
 import { Footer } from './components/Footer'
@@ -74,6 +76,8 @@ export function App() {
         <Audience />
         <Integrations />
         <Safety />
+        <Team />
+        <Testimonials />
         <EarlyAccess />
         <FAQ />
       </main>
