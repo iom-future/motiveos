@@ -1,7 +1,7 @@
 import { TESTIMONIALS } from '../data/content'
 import testimonialOlumide from '../assets/images/testimonial-olumide.jpg'
 import testimonialRachel from '../assets/images/testimonial-rachel.jpg'
-import testimonialKenji from '../assets/images/testimonial-kenji.svg'
+import testimonialKenji from '../assets/images/testimonial-kenji.jpg'
 
 const TESTIMONIAL_IMAGES = {
   olumide: testimonialOlumide,

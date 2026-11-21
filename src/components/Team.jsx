@@ -2,9 +2,9 @@ import { TEAM_MEMBERS } from '../data/content'
 import teamTunde from '../assets/images/team-tunde.jpg'
 import teamChidinma from '../assets/images/team-chidinma.jpg'
 import teamNgozi from '../assets/images/team-ngozi.jpg'
-import teamIbrahim from '../assets/images/team-ibrahim.svg'
-import teamSegun from '../assets/images/team-segun.svg'
-import teamAmina from '../assets/images/team-amina.svg'
+import teamIbrahim from '../assets/images/team-ibrahim.jpg'
+import teamSegun from '../assets/images/team-segun.jpg'
+import teamAmina from '../assets/images/team-amina.jpg'
 
 const TEAM_IMAGES = {
   tunde: teamTunde,
